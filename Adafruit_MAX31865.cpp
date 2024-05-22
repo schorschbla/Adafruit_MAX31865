@@ -312,6 +312,22 @@ uint16_t Adafruit_MAX31865::readRTD(void) {
   return rtd;
 }
 
+/**************************************************************************/
+/*!
+    @brief Read the raw 16-bit value in continuous/autoconversion mode
+    @return The raw unsigned 16-bit value, NOT temperature!
+*/
+/**************************************************************************/
+uint16_t Adafruit_MAX31865::readRTDCont(void) {
+  uint16_t rtd = readRegister16(MAX31865_RTDMSB_REG);
+
+  // remove fault
+  rtd >>= 1;
+
+  return rtd;
+}
+
+
 /**********************************************/
 
 uint8_t Adafruit_MAX31865::readRegister8(uint8_t addr) {
